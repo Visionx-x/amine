@@ -118,7 +118,7 @@ class Bot(Client):
         self.username = usr_bot_me.username
         #web-response
         app = web.AppRunner(await web_server())
-        await self.send_message(chat_id = LOG_CHANNEL.id, text = "Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ !")
+        await self.send_message(chat_id = LOG_CHANNEL, text = "Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ !")
         await app.setup()
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
