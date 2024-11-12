@@ -99,6 +99,51 @@ async def start_command(client: Client, message: Message):
             
         )
         return
+
+
+@Bot.on_message(filters.command("settings"))
+async def settings_command(client: Client, message: Message):
+    # Create an inline keyboard for settings options
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("Batch", callback_data="settings_batch"),
+            InlineKeyboardButton("Genlink", callback_data="settings_genlink")
+        ],
+        [
+            InlineKeyboardButton("Users", callback_data="settings_users"),
+            InlineKeyboardButton("Broadcast", callback_data="settings_broadcast")
+        ],
+        [
+            InlineKeyboardButton("Stats", callback_data="settings_stats"),
+            InlineKeyboardButton("Close", callback_data="settings_close")
+        ]
+    ])
+    
+    # Send the settings message with the keyboard
+    await message.reply_text("🛠️ **Settings Menu**\nChoose an option below:", reply_markup=keyboard)
+
+@Bot.on_callback_query(filters.regex("settings_"))
+async def settings_callback(client: Client, callback_query):
+    data = callback_query.data
+    
+    if data == "settings_batch":
+        await callback_query.answer("Batch feature settings...")
+        # Add your batch settings handling code here
+    elif data == "settings_genlink":
+        await callback_query.answer("Genlink feature settings...")
+        # Add your genlink settings handling code here
+    elif data == "settings_users":
+        await callback_query.answer("User management settings...")
+        # Add your user management handling code here
+    elif data == "settings_broadcast":
+        await callback_query.answer("Broadcast feature settings...")
+        # Add your broadcast handling code here
+    elif data == "settings_stats":
+        await callback_query.answer("Statistics settings...")
+        # Add your stats handling code here
+    elif data == "settings_close":
+        await callback_query.answer("Closing settings menu.")
+        await callback_query.message.delete_reply_markup()
     
 
 #=====================================================================================##
