@@ -104,6 +104,22 @@ class Bot(Client):
             self.LOGGER(__name__).info("\nBot Stopped. Join https://t.me/TitanMattersSupport for support")
             sys.exit()
 
+
+        # Register command handlers
+        self.add_handler()
+
+    def add_handler(self):
+        @self.on_message(filters.command("restart"))
+        async def handle_restart(client, message):
+            await self.restart(message.chat.id)
+
+    async def restart(self, chat_id):
+        """Restart the bot and notify the user."""
+        await self.send_message(chat_id, "Bot is restarting...")
+        self.LOGGER(__name__).info("Bot is restarting...")
+
+
+        
         self.set_parse_mode(ParseMode.HTML)
         self.LOGGER(__name__).info(f"Bot Running..!\n\nCreated by \nhttps://t.me/TitanXBots")
         self.LOGGER(__name__).info(f""" \n\n
