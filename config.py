@@ -4,6 +4,7 @@
 
 
 import os
+from os import environ
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -30,6 +31,9 @@ PORT = os.environ.get("PORT", "8080")
 #Database 
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://TitanXBots:TitanXBots@cluster0.x606y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "TitanBot")
+
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002313688533')) #Log channel id ( make sure bot is admin )
+
 
 #force sub channel id, if you want enable force sub (Use different ForceSub Channel ID)
 FORCE_SUB_CHANNEL_1 = int(os.environ.get("FORCE_SUB_CHANNEL_1", "-1002071945738"))
