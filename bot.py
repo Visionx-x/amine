@@ -9,7 +9,7 @@ from pyrogram.enums import ParseMode
 import sys
 from datetime import datetime
 
-from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, FORCE_SUB_CHANNEL_1, FORCE_SUB_CHANNEL_2, FORCE_SUB_CHANNEL_3, FORCE_SUB_CHANNEL_4, CHANNEL_ID, PORT
+from config import *
 
 
 name ="""
@@ -94,9 +94,9 @@ class Bot(Client):
                 self.LOGGER(__name__).info("\nBot Stopped. Join https://t.me/TitanMattersSupport for support")
                 sys.exit()
         try:
-            db_channel = await self.get_chat(CHANNEL_ID)
-            self.db_channel = db_channel
-            test = await self.send_message(chat_id = db_channel.id, text = "Test Message")
+            log_channel = await self.get_chat(LOG_CHANNEL)
+            self.db_channel = log_channel
+            test = await self.send_message(chat_id = log_channel.id, text = "Test Message")
             await test.delete()
         except Exception as e:
             self.LOGGER(__name__).warning(e)
