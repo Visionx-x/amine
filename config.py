@@ -27,6 +27,8 @@ OWNER_ID = int(os.environ.get("OWNER_ID", "5356695781"))
 #Port
 PORT = os.environ.get("PORT", "8080")
 
+FILE_AUTO_DELETE = int(os.getenv("FILE_AUTO_DELETE", "600")) # auto delete in seconds
+
 #Database 
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://TitanXBots:TitanXBots@cluster0.x606y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "TitanBot")
