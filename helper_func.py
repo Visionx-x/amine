@@ -10,29 +10,107 @@ from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pyrogram.errors import FloodWait
 
 async def is_subscribed(filter, client, update):
-    if not (FORCE_SUB_CHANNEL_1 or FORCE_SUB_CHANNEL_2 or FORCE_SUB_CHANNEL_3 or FORCE_SUB_CHANNEL_4):
+    if not FORCE_SUB_CHANNEL_1:
         return True
-
     user_id = update.from_user.id
-
     if user_id in ADMINS:
         return True
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_1, user_id = user_id)
+    except UserNotParticipant:
+        return False
 
-    member_status = ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER
+    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
+        return False
+    else:
+        return True
 
-    for channel_id in [FORCE_SUB_CHANNEL_1, FORCE_SUB_CHANNEL_2, FORCE_SUB_CHANNEL_3, FORCE_SUB_CHANNEL_4]:
-        if not channel_id:
-            continue
 
-        try:
-            member = await client.get_chat_member(chat_id=channel_id, user_id=user_id)
-        except UserNotParticipant:
-            return False
+async def is_subscribed(filter, client, update):
+    if not FORCE_SUB_CHANNEL_2:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_2, user_id = user_id)
+    except UserNotParticipant:
+        return False
 
-        if member.status not in member_status:
-            return False
+    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
+        return False
+    else:
+        return True
+        
 
-    return True
+async def is_subscribed(filter, client, update):
+    if not FORCE_SUB_CHANNEL_3:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_3, user_id = user_id)
+    except UserNotParticipant:
+        return False
+
+    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
+        return False
+    else:
+        return True
+        
+
+async def is_subscribed(filter, client, update):
+    if not FORCE_SUB_CHANNEL_4:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_4, user_id = user_id)
+    except UserNotParticipant:
+        return False
+
+    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
+        return False
+    else:
+        return True                
+
+
+async def is_subscribed(filter, client, update):
+    if not FORCE_SUB_CHANNEL_1:
+        return True
+    if not FORCE_SUB_CHANNEL_2:
+        return True
+    if not FORCE_SUB_CHANNEL_3:
+        return True
+    if not FORCE_SUB_CHANNEL_4:
+        return True    
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_1, user_id = user_id)
+    except UserNotParticipant:
+        return False
+
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_2, user_id = user_id)
+    except UserNotParticipant:
+        return False
+    
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_3, user_id = user_id)
+    except UserNotParticipant:
+        return False
+    
+    try:
+        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL_4, user_id = user_id)
+    except UserNotParticipant:
+        return False
+    else:
+        return True
+        
     
 
 async def encode(string):
