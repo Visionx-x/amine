@@ -7,7 +7,8 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 
 from bot import Bot
 from config import *
-from helper_func import subscribed, encode, decode, get_messages
+from config import TIME
+from helper_func import subscribed, encode, decode, get_messages, get_exp_time
 from database.database import add_user, del_user, full_userbase, present_user
 
 titanxofficials = FILE_AUTO_DELETE
@@ -86,19 +87,17 @@ async def start_command(client: Client, message: Message):
             
             except:
                 pass
-
-        
-        k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.")
-
-        # schedule the file deletion 
-        asyncio.create_task(delete_files(titanx_msgs, client, k))
-
-        # for titanx_msg in titanx_msgs:
-          # try:
-              # await titanx_msg.delete()
-              # await k.edit_text("your video / File is Successfully Deleted✅")
-        
-        return
+                if SECONDS == 0:
+                    return
+                notification_msg = await message.reply(f"<b>🌺 <u>Notice</u> 🌺</b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>")
+                await asyncio.sleep(SECONDS)    
+                for snt_msg in snt_msgs:    
+                    try:    
+                        await snt_msg.delete()  
+                    except: 
+                        pass    
+                await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")  
+                return    
     else:
         reply_markup = InlineKeyboardMarkup(
             [
