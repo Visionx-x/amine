@@ -1,5 +1,5 @@
 import os
-import asyncio, humanize 
+import asyncio, humanize
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -11,10 +11,7 @@ from config import TIME
 from helper_func import subscribed, encode, decode, get_messages, get_exp_time
 from database.database import add_user, del_user, full_userbase, present_user
 
-titanxofficials = FILE_AUTO_DELETE
-titandeveloper = titanxofficials
-file_auto_delete = humanize.naturaldelta(titandeveloper)
-
+SECONDS = TIME
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
@@ -25,7 +22,7 @@ async def start_command(client: Client, message: Message):
         except:
             pass
     text = message.text
-    if len(text)>7:
+    if len(text) > 7:
         try:
             base64_string = text.split(" ", 1)[1]
         except:
@@ -39,7 +36,7 @@ async def start_command(client: Client, message: Message):
             except:
                 return
             if start <= end:
-                ids = range(start,end+1)
+                ids = range(start, end + 1)
             else:
                 ids = []
                 i = start
@@ -61,12 +58,14 @@ async def start_command(client: Client, message: Message):
             return
         await temp_msg.delete()
 
-        titanx_msgs = [] # List to keep track of sent message 
+        titanx_msgs = []  # List to keep track of sent messages
 
         for msg in messages:
-
             if bool(CUSTOM_CAPTION) & bool(msg.document):
-                caption = CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
+                caption = CUSTOM_CAPTION.format(
+                    previouscaption="" if not msg.caption else msg.caption.html,
+                    filename=msg.document.file_name,
+                )
             else:
                 caption = "" if not msg.caption else msg.caption.html
 
@@ -76,62 +75,62 @@ async def start_command(client: Client, message: Message):
                 reply_markup = None
 
             try:
-                titanx_msg = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)
-                # await asyncio.sleep(0.5)
+                titanx_msg = await msg.copy(
+                    chat_id=message.from_user.id,
+                    caption=caption,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=reply_markup,
+                    protect_content=PROTECT_CONTENT,
+                )
                 titanx_msgs.append(titanx_msg)
-                
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                titanx_msg = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)
+                titanx_msg = await msg.copy(
+                    chat_id=message.from_user.id,
+                    caption=caption,
+                    parse_mode=ParseMode.HTML,
+                    reply_markup=reply_markup,
+                    protect_content=PROTECT_CONTENT,
+                )
                 titanx_msgs.append(titanx_msg)
-            
             except:
                 pass
-                if SECONDS == 0:
-                    return
-                notification_msg = await message.reply(f"<b>🌺 <u>Notice</u> 🌺</b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>")
-                await asyncio.sleep(SECONDS)    
-                for snt_msg in snt_msgs:    
-                    try:    
-                        await snt_msg.delete()  
-                    except: 
-                        pass    
-                await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")  
-                return    
+
+        if SECONDS == 0:
+            return
+        notification_msg = await message.reply(
+            f"<b> <u>Notice</u> </b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>"
+        )
+        await asyncio.sleep(SECONDS)
+        for snt_msg in titanx_msgs:
+            try:
+                await snt_msg.delete()
+            except:
+                pass
+        await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")
+        return
     else:
         reply_markup = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data = "help"),
-                    InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data = "about")
+                    InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data="help"),
+                    InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data="about"),
                 ]
             ]
         )
         await message.reply_photo(
-            photo= START_PIC,
-            caption= START_MSG.format(
-                first = message.from_user.first_name,
-                last = message.from_user.last_name,
-                username = None if not message.from_user.username else '@' + message.from_user.username,
-                mention = message.from_user.mention,
-                id = message.from_user.id
+            photo=START_PIC,
+            caption=START_MSG.format(
+                first=message.from_user.first_name,
+                last=message.from_user.last_name,
+                username=None if not message.from_user.username else '@' + message.from_user.username,
+                mention=message.from_user.mention,
+                id=message.from_user.id,
             ),
-            reply_markup = reply_markup,
-            
+            reply_markup=reply_markup,
         )
         return
-    
 
-#=====================================================================================##
-
-WAIT_MSG = "<b>Working....</b>"
-
-REPLY_ERROR = "<code>Use this command as a reply to any telegram message without any spaces.</code>"
-
-#=====================================================================================##
-
-    
-    
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
     buttons = [
@@ -142,14 +141,14 @@ async def not_joined(client: Client, message: Message):
         [
             InlineKeyboardButton(text="✵ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink3),
             InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ✵", url=client.invitelink4),
-        ]
+        ],
     ]
     try:
         buttons.append(
             [
                 InlineKeyboardButton(
-                    text = '☢ ɴᴏᴡ ᴄʟɪᴄᴋ ʜᴇʀᴇ •',
-                    url = f"https://t.me/{client.username}?start={message.command[1]}"
+                    text='☢ ɴᴏᴡ ᴄʟɪᴄᴋ ʜᴇʀᴇ •',
+                    url=f"https://t.me/{client.username}?start={message.command[1]}",
                 )
             ]
         )
@@ -157,16 +156,16 @@ async def not_joined(client: Client, message: Message):
         pass
 
     await message.reply_photo(
-    photo=FORCE_PIC, 
-    caption=FORCE_MSG.format(
-        first=message.from_user.first_name,
-        last=message.from_user.last_name,
-        username=None if not message.from_user.username else '@' + message.from_user.username,
-        mention=message.from_user.mention,
-        id=message.from_user.id
-    ),
-    reply_markup=InlineKeyboardMarkup(buttons)
-)
+        photo=FORCE_PIC,
+        caption=FORCE_MSG.format(
+            first=message.from_user.first_name,
+            last=message.from_user.last_name,
+            username=None if not message.from_user.username else '@' + message.from_user.username,
+            mention=message.from_user.mention,
+            id=message.from_user.id,
+        ),
+        reply_markup=InlineKeyboardMarkup(buttons),
+    )
 
 @Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
@@ -184,7 +183,7 @@ async def send_text(client: Bot, message: Message):
         blocked = 0
         deleted = 0
         unsuccessful = 0
-        
+
         pls_wait = await message.reply("<i>ʙʀᴏᴀᴅᴄᴀꜱᴛ ᴘʀᴏᴄᴇꜱꜱɪɴɢ....</i>")
         for chat_id in query:
             try:
@@ -204,7 +203,7 @@ async def send_text(client: Bot, message: Message):
                 unsuccessful += 1
                 pass
             total += 1
-        
+
         status = f"""<b><u>ʙʀᴏᴀᴅᴄᴀꜱᴛ...</u>
 
 Total Users: <code>{total}</code>
@@ -212,25 +211,10 @@ Successful: <code>{successful}</code>
 Blocked Users: <code>{blocked}</code>
 Deleted Accounts: <code>{deleted}</code>
 Unsuccessful: <code>{unsuccessful}</code></b>"""
-        
+
         return await pls_wait.edit(status)
 
     else:
         msg = await message.reply(REPLY_ERROR)
         await asyncio.sleep(8)
         await msg.delete()
-
-
-
-
-# Function to handle file deletion
-async def delete_files(messages, client, k):
-    await asyncio.sleep(FILE_AUTO_DELETE)  # Wait for the duration specified in config.py
-    for msg in messages:
-        try:
-            await client.delete_messages(chat_id=msg.chat.id, message_ids=[msg.id])
-        except Exception as e:
-            print(f"The attempt to delete the media {msg.id} was unsuccessful: {e}")
-    # await client.send_message(messages[0].chat.id, "Your Video / File Is Successfully Deleted ✅")
-    await k.edit_text("Your Video / File Is Successfully Deleted ✅")
-
