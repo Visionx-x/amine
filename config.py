@@ -27,8 +27,7 @@ OWNER_ID = int(os.environ.get("OWNER_ID", "5356695781"))
 #Port
 PORT = os.environ.get("PORT", "8080")
 
-#Time in seconds for message delete, put 0 to never delete
-TIME = int(os.environ.get("TIME", "60"))
+FILE_AUTO_DELETE = int(os.getenv("FILE_AUTO_DELETE", "600")) # auto delete in seconds
 
 #Database 
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://TitanXBots:TitanXBots@cluster0.x606y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
