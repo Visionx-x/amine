@@ -2,7 +2,6 @@
 
 import base64
 import re
-import time
 import asyncio
 from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus
@@ -172,15 +171,7 @@ async def get_message_id(client, message):
                 return msg_id
     else:
         return 0
-
-def get_exp_time(seconds):
-    periods = [('days', 86400), ('hours', 3600), ('mins', 60), ('secs', 1)]
-    result = ''
-    for period_name, period_seconds in periods:
-        if seconds >= period_seconds:
-            period_value, seconds = divmod(seconds, period_seconds)
-            result += f'{int(period_value)} {period_name} '
-    return result.strip()
+        
 
 def get_readable_time(seconds: int) -> str:
     count = 0
