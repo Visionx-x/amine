@@ -9,6 +9,10 @@ from config import FORCE_SUB_CHANNEL_1, FORCE_SUB_CHANNEL_2, FORCE_SUB_CHANNEL_3
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pyrogram.errors import FloodWait
 
+
+
+
+
 async def is_subscribed(filter, client, update):
     if not FORCE_SUB_CHANNEL_1:
         return True
