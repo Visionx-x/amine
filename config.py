@@ -29,6 +29,10 @@ PORT = os.environ.get("PORT", "8080")
 
 FILE_AUTO_DELETE = int(os.environ.get("FILE_AUTO_DELETE", "600")) # auto delete in seconds
 
+FILE_AUTO_DELETE = environ.get("FILE_AUTO_DELETE", True)
+if FILE_AUTO_DELETE == "True":
+    FILE_AUTO_DELETE = True
+   
 #Database 
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://TitanXBots:TitanXBots@cluster0.x606y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "TitanBot")
