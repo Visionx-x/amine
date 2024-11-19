@@ -37,7 +37,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
         )
     elif data == "aboutdev":
         await query.message.edit_text(
-            text=ABOUT_DEV_TXT.format(first=query.from_user.first_name),
+            text=ABOUT_DEV_TXT,
             disable_web_page_preview = True,
             reply_markup = InlineKeyboardMarkup(
                 [
