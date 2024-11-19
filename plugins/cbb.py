@@ -43,7 +43,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 [
                     [
                     InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url = "https://github.com/TitanXBots/Filesharing"),
-                    InlineKeyboardButton("⚓ ʜᴏᴍᴇ", callback_data = "close")
+                    InlineKeyboardButton("⚓ ʜᴏᴍᴇ", callback_data = "start")
                     ]
                 ]
             )
