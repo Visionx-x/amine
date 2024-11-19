@@ -44,10 +44,13 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     [
                     InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data = "help"),
                     InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data = "about")
+                    ],
+                    [
+                    InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url = "https://github.com/TitanXBots/Filesharing")
                     ]
                 ]
-            )
-        )            
+            )          
+        )  
     elif data == "close":
         await query.message.delete()
         try:
