@@ -108,7 +108,8 @@ async def start_command(client: Client, message: Message):
                     InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data = "about")
                 ],
                 [
-                    InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url = "https://github.com/Jisshubot/Jisshu-filter-bot")
+                    InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url = "https://github.com/Jisshubot/Jisshu-filter-bot"),
+                    InlinekeyboardButton("☎️ ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url = "https://t.me/TitanMattersSupport")
                 ]
             ]
         )
