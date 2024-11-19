@@ -109,6 +109,7 @@ async def start_command(client: Client, message: Message):
                 ],
                 [
                     InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url = "https://github.com/TitanXBots/Filesharing")
+                    InlineKeyboardButton("⚡ ᴀʙᴏᴜᴛ ᴅᴇᴠ", callback_data = "aboutdev")
                 ]
             ]
         )
