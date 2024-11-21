@@ -10,3 +10,4 @@ aiohttp
 
 humanize
 requests
+pip install --upgrade -r
