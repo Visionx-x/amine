@@ -44,6 +44,9 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     [
                     InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data = "help"),
                     InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data = "about")
+                    ],
+                    [
+                    InlinekeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url = "https://github.com/Jisshubot/Jisshu-filter-bot")
                     ]
                 ]
             )
