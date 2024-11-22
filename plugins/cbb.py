@@ -39,11 +39,15 @@ async def cb_handler(client: Bot, query: CallbackQuery):
         await query.message.edit_text(
             text=START_MSG.format(first=query.from_user.first_name),
             disable_web_page_preview=True,
-            reply_markup = InlineKeyboardMarkup(
+            reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                    InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data = "help"),
-                    InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data = "about")
+                        InlineKeyboardButton("🧠 ʜᴇʟᴘ" , callback_data="help") ,
+                        InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ" , callback_data="about")
+                    ] ,
+                    [
+                        InlineKeyboardButton("💻 ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ" , user_id=5356695781) ,
+                        InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ" , url="https://github.com/Jisshubot/Jisshu-filter-bot")
                     ]
                 ]
             )
