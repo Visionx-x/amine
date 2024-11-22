@@ -107,12 +107,15 @@ async def start_command(client: Client , message: Message):
         reply_markup = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🧠 ʜᴇʟᴘ" , callback_data="help") ,
+                    InlineKeyboardButton("🧠 ʜᴇʟᴘ" , callback_data="help"),
                     InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ" , callback_data="about")
                 ] ,
                 [
                     InlineKeyboardButton("💻 ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ" , user_id=5356695781),
                     InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ" , url="https://github.com/Jisshubot/Jisshu-filter-bot")
+                ],
+                [
+                    InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜꜱᴇ ʙᴏᴛ", url="https://t.me/TitanXBackup/33")
                 ]
             ]
         )
