@@ -48,6 +48,9 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                     [
                         InlineKeyboardButton("💻 ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ" , user_id=5356695781) ,
                         InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ" , url="https://github.com/Jisshubot/Jisshu-filter-bot")
+                    ] ,
+                    [
+                        InlinekeyboardButton("⚙️ ʜᴏᴡ ᴛᴏ ᴜꜱᴇ ʙᴏᴛ" , url="https://t.me/TitanXBackup/33")
                     ]
                 ]
             )
