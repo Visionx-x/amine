@@ -107,7 +107,7 @@ async def start_command(client: Client, message: Message):
                     InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data="about")
                 ],
                 [
-                    InlineKeyboardButton("💻 ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ", user_id=5356695781),
+                    InlineKeyboardButton("💻 ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ", url="https://t.me/TitanOwner"),
                     InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url="https://github.com/Jisshubot/Jisshu-filter-bot")
                 ],
                 [
@@ -115,10 +115,6 @@ async def start_command(client: Client, message: Message):
                 ],
                 [
                     InlineKeyboardButton("☆ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ ɢʀᴏᴜᴘ ☆", url="https://t.me/TitanMoviess")
-                ],
-                [
-                    InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data="help"),
-                    InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data="about")
                 ],
                 [
                     InlineKeyboardButton("🤖 ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/TitanXBots"),
