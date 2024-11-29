@@ -99,7 +99,7 @@ async def start_command(client: Client, message: Message):
             return
 
         notification_msg = await message.reply(
-            f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {get_exp_time} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.</b>", 
+            f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.</b>", 
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text='☢ ɴᴏᴡ ᴄʟɪᴄᴋ ʜᴇʀᴇ •', url=f"https://t.me/{client.username}?start={message.command[1]}")]])
         )
 
