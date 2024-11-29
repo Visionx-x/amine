@@ -1,6 +1,7 @@
 import os
 import asyncio
 import humanize
+import time 
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -94,25 +95,25 @@ async def start_command(client: Client, message: Message):
                 print(f"Error copying message: {e}")
                 pass
 
-async def your_function_name(message, SECONDS, snt_msgs, client):
-    if SECONDS == 0:
-        return
-    notification_msg = await message.reply(
-        f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.</b>", 
-        reply_markup=[[InlineKeyboardButton("Get Again", url=f"https://t.me/{client.username}?start={message.command[1]}")]]
-    )
-    
-    await asyncio.sleep(SECONDS)
-    
-    for snt_msg in snt_msgs:
-        try:
-            await snt_msg.delete()
-        except:
-            pass
-    
-    await notification_msg.edit("<b>Your file has been successfully deleted! </b>")
+if SECONDS == 0:
     return
 
+notification_msg = await message.reply(
+    f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.</b>", 
+    reply_markup=[[InlineKeyboardButton(text='☢ ɴᴏᴡ ᴄʟɪᴄᴋ ʜᴇʀᴇ •', url=f"https://t.me/{client.username}?start={message.command[1]}")]]
+)
+
+await asyncio.sleep(SECONDS)
+
+for snt_msg in snt_msgs:
+    try:
+        await snt_msg.delete()
+    except:
+        pass
+
+await notification_msg.edit("<b>Your file has been successfully deleted! </b>")
+return
+    
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
     buttons = [
