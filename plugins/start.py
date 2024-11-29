@@ -91,62 +91,30 @@ async def start_command(client: Client, message: Message):
             except Exception as e:
                 print(f"Error copying message: {e}")
                 pass
-                if SECONDS == 0:
-                    return
-                notification_msg = await message.reply(f"<b>🌺 <u>Notice</u> 🌺</b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>")
-                await asyncio.sleep(SECONDS)    
-                for snt_msg in snt_msgs:    
-                    try:    
-                        await snt_msg.delete()  
-                    except: 
-                        pass    
-                await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")  
-                return
 
- 
-    else:
-        reply_markup = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("🧠 ʜᴇʟᴘ", callback_data="help"),
-                    InlineKeyboardButton("🔰 ᴀʙᴏᴜᴛ", callback_data="about")
-                ],
-                [
-                    InlineKeyboardButton("💻 ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ", url="https://t.me/TitanOwner"),
-                    InlineKeyboardButton("🔐 ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ", url="https://github.com/TitanXBots/FileStore-Bot")
-                ],
-                [
-                    InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜꜱᴇ ʙᴏᴛ", url="https://t.me/TitanXBackup/33")
-                ],
-                [
-                    InlineKeyboardButton("☆ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ ɢʀᴏᴜᴘ ☆", url="https://t.me/TitanMoviess")
-                ],
-                [
-                    InlineKeyboardButton("🤖 ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ", url="https://t.me/TitanXBots"),
-                    InlineKeyboardButton("🔍 ꜱᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url="https://t.me/TitanMattersSupport")
-                ]
-            ]
-        )
-        await message.reply_photo(
-            photo=START_PIC,
-            caption=START_MSG.format(
-                first=message.from_user.first_name,
-                last=message.from_user.last_name,
-                username=None if not message.from_user.username else '@' + message.from_user.username,
-                mention=message.from_user.mention,
-                id=message.from_user.id
-            ),
-            reply_markup=reply_markup,
-        )
+async def your_function_name(message, SECONDS, snt_msgs, client):
+    if SECONDS == 0:
         return
-
-# =====================================================================================##
-
-WAIT_MSG = "<b>Working....</b>"
-
-REPLY_ERROR = "<code>Use this command as a reply to any telegram message without any spaces.</code>"
-
-# =====================================================================================##
+    
+    url = f"https://t.me/{client.username}?start={message.command[1]}"
+    keyboard = [[InlineKeyboardButton("Click Here", url=url)]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    notification_msg = await message.reply(
+        f"<b>🌺 <u>Notice</u> 🌺</b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>", 
+        reply_markup=reply_markup
+    )
+    
+    await asyncio.sleep(SECONDS)
+    
+    for snt_msg in snt_msgs:
+        try:
+            await snt_msg.delete()
+        except:
+            pass
+    
+    await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")
+    return
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
@@ -235,6 +203,3 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         msg = await message.reply(REPLY_ERROR)
         await asyncio.sleep(8)
         await msg.delete()
-
-
-
