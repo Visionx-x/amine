@@ -14,6 +14,8 @@ titanxofficials = FILE_AUTO_DELETE
 titandeveloper = titanxofficials
 file_auto_delete = humanize.naturaldelta(titandeveloper)
 
+SECONDS = TIME 
+
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
     user_id = message.from_user.id
