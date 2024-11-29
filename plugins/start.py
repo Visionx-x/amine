@@ -95,14 +95,9 @@ async def start_command(client: Client, message: Message):
 async def your_function_name(message, SECONDS, snt_msgs, client):
     if SECONDS == 0:
         return
-    
-    url = f"https://t.me/{client.username}?start={message.command[1]}"
-    keyboard = [[InlineKeyboardButton("Click Here", url=url)]]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    
     notification_msg = await message.reply(
-        f"<b>🌺 <u>Notice</u> 🌺</b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>", 
-        reply_markup=reply_markup
+        f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.")</b>", 
+        reply_markup=[[InlineKeyboardButton("Get Again", url=f"https://t.me/{client.username}?start={message.command[1]}")]]
     )
     
     await asyncio.sleep(SECONDS)
@@ -113,7 +108,7 @@ async def your_function_name(message, SECONDS, snt_msgs, client):
         except:
             pass
     
-    await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")
+    await notification_msg.edit("<b>Your file has been successfully deleted! </b>")
     return
 
 @Bot.on_message(filters.command('start') & filters.private)
