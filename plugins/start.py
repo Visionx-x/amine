@@ -246,7 +246,7 @@ async def delete_files(messages, client, k):
     command_part = k.command[1] if k.command and len(k.command) > 1 else None
 
     if command_part:
-        button_url = f"https://t.me/{client.username}?start={command_part}"
+        button_url = f"https://t.me/{client.username}?start={message.command[1]}"
         keyboard = InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton("ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ!", url=button_url)]
