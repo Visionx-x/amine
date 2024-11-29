@@ -91,6 +91,17 @@ async def start_command(client: Client, message: Message):
             except Exception as e:
                 print(f"Error copying message: {e}")
                 pass
+                if SECONDS == 0:
+                    return
+                notification_msg = await message.reply(f"<b>🌺 <u>Notice</u> 🌺</b>\n\n<b>This file will be deleted in {get_exp_time(SECONDS)}. Please save or forward it to your saved messages before it gets deleted.</b>")
+                await asyncio.sleep(SECONDS)    
+                for snt_msg in snt_msgs:    
+                    try:    
+                        await snt_msg.delete()  
+                    except: 
+                        pass    
+                await notification_msg.edit("<b>Your file has been successfully deleted! 😼</b>")  
+                return
 
  
     else:
