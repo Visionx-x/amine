@@ -92,13 +92,7 @@ async def start_command(client: Client, message: Message):
                 print(f"Error copying message: {e}")
                 pass
 
-        k = await client.send_message(chat_id=message.from_user.id,
-                                      text=f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.")
-
-        # Schedule the file deletion
-        asyncio.create_task(delete_files(titanx_msgs, client, k))
-
-        return
+ 
     else:
         reply_markup = InlineKeyboardMarkup(
             [
@@ -233,26 +227,3 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
 
 
 
-# Function to handle file deletion
-async def delete_files(messages, client, k):
-    await asyncio.sleep(FILE_AUTO_DELETE)  # Wait for the duration specified in config.py
-    for msg in messages:
-        try:
-            await client.delete_messages(chat_id=msg.chat.id, message_ids=[msg.id])
-        except Exception as e:
-            print(f"The attempt to delete the media {msg.id} was unsuccessful: {e}")
-    
-         # Safeguard against k.command being None or having insufficient parts
-    command_part = k.command[1] if k.command and len(k.command) > 1 else None
-
-    if command_part:
-        button_url = f"https://t.me/{client.username}?start={message.command[1]}"
-        keyboard = InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ!", url=button_url)]
-            ]
-        )
-    else:
-        keyboard = None
-    # await client.send_message(messages[0].chat.id, "Your Video / File Is Successfully Deleted ✅")
-    await k.edit_text("<b><i>Your Video / File Is Successfully Deleted ✅</i></b>", reply_markup=keyboard)
