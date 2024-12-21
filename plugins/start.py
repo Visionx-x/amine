@@ -80,20 +80,19 @@ async def start_command(client: Client, message: Message):
                 reply_markup = None
 
             try:
-                titanx_msg = await msg.copy(chat_id=message.from_user.id, caption=caption, parse_mode=ParseMode.HTML,
-                                            reply_markup=reply_markup, protect_content=PROTECT_CONTENT)
+                titanx_msg = await msg.copy(chat_id=message.from_user.id, caption=caption, parse_mode=ParseMode.HTML, reply_markup=reply_markup, protect_content=PROTECT_CONTENT)
                 titanx_msgs.append(titanx_msg)
+                
             except FloodWait as e:
                 await asyncio.sleep(e.value)
-                titanx_msg = await msg.copy(chat_id=message.from_user.id, caption=caption, parse_mode=ParseMode.HTML,
-                                            reply_markup=reply_markup, protect_content=PROTECT_CONTENT)
+                titanx_msg = await msg.copy(chat_id=message.from_user.id, caption=caption, parse_mode=ParseMode.HTML, reply_markup=reply_markup, protect_content=PROTECT_CONTENT)
                 titanx_msgs.append(titanx_msg)
+                
             except Exception as e:
                 print(f"Error copying message: {e}")
                 pass
 
-        k = await client.send_message(chat_id=message.from_user.id,
-                                      text=f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.")
+        k = await client.send_message(chat_id=message.from_user.id, text=f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please Forward This Video / File To Somewhere Else And Start Downloading There.")
 
         # Schedule the file deletion
         asyncio.create_task(delete_files(titanx_msgs, client, k))
