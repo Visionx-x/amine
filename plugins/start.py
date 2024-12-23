@@ -230,7 +230,6 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         await msg.delete()
 
 
-
 async def delete_files(messages, client, k):
     await asyncio.sleep(FILE_AUTO_DELETE)  # Wait for the duration specified in config.py
     for msg in messages:
@@ -238,10 +237,12 @@ async def delete_files(messages, client, k):
             await client.delete_messages(chat_id=msg.chat.id, message_ids=[msg.id])
         except Exception as e:
             print(f"The attempt to delete the media {msg.id} was unsuccessful: {e}")
+
         # Safeguard against k.command being None or having insufficient parts
     command_part = k.command[1] if k.command and len(k.command) > 1 else None
+
     if command_part:
-        button_url = f"https://t.me/{temp.U_NAME}?start={ADMINS[0]}_{file_id}")]
+        button_url = f"https://t.me/{client.username}?start={command_part}"
         keyboard = InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton("ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ!", url=button_url)]
@@ -249,7 +250,6 @@ async def delete_files(messages, client, k):
         )
     else:
         keyboard = None
+
     # Edit message with the button
     await k.edit_text("<b><i>Your Video / File Is Successfully Deleted ✅</i></b>", reply_markup=keyboard)
-
-
