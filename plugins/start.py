@@ -9,6 +9,8 @@ from bot import Bot
 from config import *
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
+from flask import Flask
+import json
 
 titanxofficials = FILE_AUTO_DELETE
 titandeveloper = titanxofficials
@@ -259,28 +261,32 @@ async def delete_files(messages, client, k):
 
 
 
-class FilestoreBot:
-    def __init__(self):
-        # Dictionary to store banned users
-        self.banned_users = {}
 
-    def ban_user(self, user_id):
-        """Ban a user by user_id."""
-        if user_id in self.banned_users:
-            return f"User {user_id} is already banned."
-        
-        self.banned_users[user_id] = True
-        return f"User {user_id} has been banned."
+# Load or initialize the banned users list
+try:
+    with open('banned_users.json', 'r') as file:
+        banned_users = json.load(file)
+except FileNotFoundError:
+    banned_users = []
 
-    def unban_user(self, user_id):
-        """Unban a user by user_id."""
-        if user_id not in self.banned_users:
-            return f"User {user_id} is not banned."
-        
-        del self.banned_users[user_id]
-        return f"User {user_id} has been unbanned."
+@app.route('/ban_user', methods=['POST'])
+def ban_user():
+    data = request.json
+    user_id = data.get('user_id')
 
-    def is_user_banned(self, user_id):
-        """Check if a user is banned."""
-        return user_id in self.banned_users
+    if user_id in banned_users:
+        return {"message": "User is already banned."}, 400
 
+    banned_users.append(user_id)
+    save_banned_users()
+    return {"message": f"User {user_id} has been banned."}, 200
+
+def save_banned_users():
+    with open('banned_users.json', 'w') as file:
+        json.dump(banned_users, file)
+
+@app.route('/is_banned/', methods=['GET'])
+def is_banned(user_id):
+    if user_id in banned_users:
+        return {"banned": True}, 200
+    return {"banned": False}, 200
