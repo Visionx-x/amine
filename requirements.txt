@@ -9,5 +9,5 @@ dnspython
 aiohttp
 humanize
 requests
-json
+ujson
 Flask
