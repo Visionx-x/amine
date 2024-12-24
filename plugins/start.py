@@ -9,8 +9,7 @@ from bot import Bot
 from config import *
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
-from flask import Flask
-import ujson
+
 
 titanxofficials = FILE_AUTO_DELETE
 titandeveloper = titanxofficials
@@ -256,42 +255,3 @@ async def delete_files(messages, client, k):
     # Edit message with the button
     await k.edit_text("<b><i>Your Video / File Is Successfully Deleted ✅</i></b>", reply_markup=keyboard)
 
-
-
-
-
-
-
-app = Flask(__name__)
-
-# Load or initialize the banned users list
-try:
-    with open('banned_users.json', 'r') as file:
-        banned_users = json.load(file)
-except FileNotFoundError:
-    banned_users = []
-
-@app.route('/ban_user', methods=['POST'])
-def ban_user():
-    data = request.json
-    user_id = data.get('user_id')
-
-    if user_id in banned_users:
-        return {"message": "User is already banned."}, 400
-
-    banned_users.append(user_id)
-    save_banned_users()
-    return {"message": f"User {user_id} has been banned."}, 200
-
-def save_banned_users():
-    with open('banned_users.json', 'w') as file:
-        json.dump(banned_users, file)
-
-@app.route('/is_banned/', methods=['GET'])
-def is_banned(user_id):
-    if user_id in banned_users:
-        return {"banned": True}, 200
-    return {"banned": False}, 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
