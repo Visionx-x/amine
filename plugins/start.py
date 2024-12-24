@@ -262,6 +262,8 @@ async def delete_files(messages, client, k):
 
 
 
+app = Flask(__name__)
+
 # Load or initialize the banned users list
 try:
     with open('banned_users.json', 'r') as file:
@@ -290,3 +292,6 @@ def is_banned(user_id):
     if user_id in banned_users:
         return {"banned": True}, 200
     return {"banned": False}, 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
