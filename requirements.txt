@@ -9,3 +9,5 @@ dnspython
 aiohttp
 humanize
 requests
+json
+Flask
