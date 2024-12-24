@@ -10,7 +10,7 @@ from config import *
 from helper_func import subscribed, encode, decode, get_messages
 from database.database import add_user, del_user, full_userbase, present_user
 from flask import Flask
-import json
+import ujson
 
 titanxofficials = FILE_AUTO_DELETE
 titandeveloper = titanxofficials
