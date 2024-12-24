@@ -7,7 +7,7 @@ git clone https://github.com/Visionx-x/amine
 
 * 4 open bot derectory
  ```bash
-cd A_No_Pic
+cd amine
 ```
 
 * 5 Install requirements to run the bot
