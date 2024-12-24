@@ -253,3 +253,34 @@ async def delete_files(messages, client, k):
 
     # Edit message with the button
     await k.edit_text("<b><i>Your Video / File Is Successfully Deleted ✅</i></b>", reply_markup=keyboard)
+
+
+
+
+
+
+class FilestoreBot:
+    def __init__(self):
+        # Dictionary to store banned users
+        self.banned_users = {}
+
+    def ban_user(self, user_id):
+        """Ban a user by user_id."""
+        if user_id in self.banned_users:
+            return f"User {user_id} is already banned."
+        
+        self.banned_users[user_id] = True
+        return f"User {user_id} has been banned."
+
+    def unban_user(self, user_id):
+        """Unban a user by user_id."""
+        if user_id not in self.banned_users:
+            return f"User {user_id} is not banned."
+        
+        del self.banned_users[user_id]
+        return f"User {user_id} has been unbanned."
+
+    def is_user_banned(self, user_id):
+        """Check if a user is banned."""
+        return user_id in self.banned_users
+
